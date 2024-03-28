@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Scholarships</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navigation and other common layout code here -->
+
+  <div class="container mx-auto mt-10">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold text-center mb-4">Available Scholarships</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <?php foreach ($scholarships as $scholarship): ?>
+          <div class="bg-gray-100 p-4 rounded-md">
+            <h3 class="text-lg font-bold"><?php echo htmlspecialchars($scholarship['title']); ?></h3>
+            <p><?php echo htmlspecialchars($scholarship['description']); ?></p>
+            <a href="<?php echo htmlspecialchars($scholarship['link']); ?>" target="_blank" class="text-blue-500">Learn More</a>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
