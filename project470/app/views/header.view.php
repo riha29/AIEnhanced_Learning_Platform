@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/header.css">
+
 </head>
 <body class="w-full">
     
@@ -26,9 +28,9 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
-                <a href="<?=ROOT?>/my_courses" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">My Courses</a>
+                <a href="<?=ROOT?>/browse_courses" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Courses</a>
                 <a href="<?=ROOT?>/friends" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Friends</a>   
-                <div class="w3-dropdown-hover">
+                <div class="w3-dropdown-hover" style="z-index: 5">
                   <a class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     <img src="<?=get_image(user('image'))?>" width="45" height="45" ></a>
                   <div class="w3-dropdown-content w3-bar-block w3-card-4">
