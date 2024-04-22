@@ -14,6 +14,9 @@ class Login{
         //echo "This is the login controller";
         $data = [];
         $req = new Request;
+        //to logout in case back button is clicked
+        $ses = new Session;
+        $ses->logout();
         
         if($req->posted()){
             $user = new User();
@@ -24,7 +27,7 @@ class Login{
                 if(password_verify($password, $row->password)){                
                     $ses = new Session;
                     $ses->auth($row);
-                    redirect('home');
+                    redirect('browse_courses');
                 } else {
                     show('false');
                 }
