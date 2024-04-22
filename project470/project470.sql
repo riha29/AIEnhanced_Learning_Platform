@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2024 at 10:05 AM
+-- Generation Time: Apr 22, 2024 at 07:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,6 +47,68 @@ INSERT INTO `courses` (`id`, `title`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `history`
+--
+
+CREATE TABLE `history` (
+  `history_id` int(11) NOT NULL,
+  `player_one_id` int(11) NOT NULL,
+  `player_two_id` int(11) NOT NULL,
+  `player_one_points` int(11) NOT NULL,
+  `player_two_points` int(11) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `winner` int(11) DEFAULT NULL,
+  `datetime` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `history`
+--
+
+INSERT INTO `history` (`history_id`, `player_one_id`, `player_two_id`, `player_one_points`, `player_two_points`, `status`, `winner`, `datetime`) VALUES
+(20, 21, 18, 2885, 1950, 'complete', 21, '2024-04-22 00:37:15'),
+(21, 21, 15, 945, 4930, 'complete', 15, '2024-04-22 00:30:26'),
+(22, 15, 16, 910, 3940, 'complete', 16, '2024-04-22 23:21:09'),
+(23, 21, 15, 4925, 0, 'pending', NULL, '2024-04-22 00:35:35'),
+(24, 16, 15, 4915, 0, 'pending', NULL, '2024-04-22 23:22:12'),
+(25, 16, 17, 4950, 1950, 'complete', 16, '2024-04-22 23:29:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `question_id` int(11) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `option_a` varchar(100) NOT NULL,
+  `option_b` varchar(100) NOT NULL,
+  `option_c` varchar(100) NOT NULL,
+  `option_d` varchar(100) NOT NULL,
+  `answer` varchar(100) NOT NULL,
+  `question` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`question_id`, `category`, `option_a`, `option_b`, `option_c`, `option_d`, `answer`, `question`) VALUES
+(1, 'history', '1492', '1498', '1501', '1510', '1492', 'What year did Christopher Columbus first set foot in the Americas?'),
+(2, 'history', 'Julius Caesar', 'Augustus', 'Nero', 'Constantine', 'Augustus', 'Who was the first Emperor of Rome?'),
+(3, 'entertainment', '300', 'Oceans 13', 'Burn After Reading', 'Troy', '300', 'Which movie does NOT have Brad Pitt in it?'),
+(4, 'entertainment', 'Dark Knight', 'Lord of the Rings: The Fellow Ship of the Ring', 'Harry Potter and the Sorcerers Stone', 'Titanic', 'Titanic', 'Which one is the highest-grossing film ever?'),
+(5, 'sports', 'Scotland', 'Canada', 'Sweden', 'Norway', 'Scotland', 'In which country was the sport of curling invented?'),
+(6, '', 'Pakistan', 'England', 'Australia', 'West Indies', 'West Indies', 'Which country won the first ever Cricket World Cup in 1975?'),
+(7, 'Arts and Culture', 'Shape', 'Color', 'Value', 'Texture', 'Value', 'This is the lightness or darkness of a color.'),
+(8, 'Arts and Culture', 'Surrealism', 'Renaissance', 'Cubism', 'Baroque', 'Surrealism', 'Which artistic movement emerged in the early 20th century, characterized by abstract forms, bold colors, and a focus on expressing emotion and inner experiences?'),
+(9, 'Geography', 'Nile', 'Mississippi', 'Yangtze', 'Amazon', 'Nile', 'Which of the following is the longest river in the world?'),
+(10, 'Geography', 'Mount McKinley (Denali)', 'Mount Everest', 'Mount Kilimanjaro', 'K2', 'Mount Everest', 'Which of the following is the tallest mountain in the world?');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `relations`
 --
 
@@ -66,8 +128,11 @@ INSERT INTO `relations` (`req_id`, `sender_id`, `receiver_id`, `date`, `status`)
 (32, 17, 18, '2024-04-02 19:04:29', 'friends'),
 (34, 17, 15, '2024-04-02 19:04:33', 'friends'),
 (35, 15, 16, '2024-04-02 19:05:04', 'friends'),
-(36, 18, 15, '2024-04-02 19:05:26', 'pending'),
-(38, 16, 18, '2024-04-02 19:24:27', 'pending');
+(38, 16, 18, '2024-04-02 19:24:27', 'pending'),
+(42, 21, 18, '2024-04-22 00:17:56', 'friends'),
+(44, 21, 15, '2024-04-22 00:35:12', 'pending'),
+(45, 21, 17, '2024-04-22 00:35:14', 'friends'),
+(46, 16, 21, '2024-04-22 23:20:39', 'pending');
 
 -- --------------------------------------------------------
 
@@ -115,18 +180,20 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `image` varchar(1024) DEFAULT NULL,
   `country` varchar(50) NOT NULL,
-  `course_list` varchar(500) NOT NULL
+  `course_list` varchar(500) NOT NULL,
+  `score` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `age`, `date`, `email`, `password`, `image`, `country`, `course_list`) VALUES
-(15, 'adiba', 22, '2024-03-26 21:15:27', 'adiba@mail.com', '$2y$10$e31yliq1Sal9sE5QSNUlM.mewzYsyN2.KdsMKfLGH42UJMig8ka.G', 'uploads/1711524370download.png', 'Bangladesh', '8, 7'),
-(16, 'pika', 15, '2024-04-01 12:19:26', 'pika@mail.com', '$2y$10$wWv5J6Pelkckr4WLenS34.JVYhY/pPHmRecKRghhh0iP3eekMvuUq', 'uploads/17119539187a1cb2039c84ad740c575c128c905509.jpg', 'Japan', ''),
-(17, 'melody', 25, '2024-04-01 12:20:12', 'melo@mail.com', '$2y$10$AU6GmllIXH4Ji1VtdE1UnO6EMgglsrAYTw3XRX7LiFB0Q.J8W.qCS', 'uploads/1711953951cute_sanrio_my_melody_by_pokefan276_dfzehd3-fullview.jpg', 'Japan', ''),
-(18, 'bob', 134, '2024-04-02 16:37:13', 'bob@mail.com', '$2y$10$i74VRDfKl50NquJSTxEfi.9ovTSGW7zGXjLnOYLw/URsjjjzs5p6m', 'uploads/1712054302F9xhN65WQAATLoU.jpg', 'Sea', '');
+INSERT INTO `users` (`id`, `username`, `age`, `date`, `email`, `password`, `image`, `country`, `course_list`, `score`) VALUES
+(15, 'adiba', 22, '2024-03-26 21:15:27', 'adiba@mail.com', '$2y$10$e31yliq1Sal9sE5QSNUlM.mewzYsyN2.KdsMKfLGH42UJMig8ka.G', 'uploads/1711524370download.png', 'Bangladesh', '8', 4930),
+(16, 'pika', 15, '2024-04-01 12:19:26', 'pika@mail.com', '$2y$10$wWv5J6Pelkckr4WLenS34.JVYhY/pPHmRecKRghhh0iP3eekMvuUq', 'uploads/17119539187a1cb2039c84ad740c575c128c905509.jpg', 'Japan', '8, 7', 8890),
+(17, 'melody', 25, '2024-04-01 12:20:12', 'melo@mail.com', '$2y$10$AU6GmllIXH4Ji1VtdE1UnO6EMgglsrAYTw3XRX7LiFB0Q.J8W.qCS', 'uploads/1711953951cute_sanrio_my_melody_by_pokefan276_dfzehd3-fullview.jpg', 'Japan', '', 0),
+(18, 'bob', 134, '2024-04-02 16:37:13', 'bob@mail.com', '$2y$10$i74VRDfKl50NquJSTxEfi.9ovTSGW7zGXjLnOYLw/URsjjjzs5p6m', 'uploads/1712054302F9xhN65WQAATLoU.jpg', 'Sea', '', 0),
+(21, 'Po', 23, '2024-04-22 00:09:07', 'po@mail.com', '$2y$10$VSiooUwcVAyUWMbPkeNHBe0pjobMiuMdVSlmQdSa/bNhdwYVIm7O2', 'uploads/1713723302images.jpg', 'Japan', '8, 1', 2885);
 
 --
 -- Indexes for dumped tables
@@ -137,6 +204,20 @@ INSERT INTO `users` (`id`, `username`, `age`, `date`, `email`, `password`, `imag
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`history_id`),
+  ADD KEY `history_ibfk_1` (`player_one_id`),
+  ADD KEY `history_ibfk_2` (`player_two_id`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`question_id`);
 
 --
 -- Indexes for table `relations`
@@ -170,10 +251,22 @@ ALTER TABLE `courses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `history`
+--
+ALTER TABLE `history`
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `relations`
 --
 ALTER TABLE `relations`
-  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -185,11 +278,18 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `history`
+--
+ALTER TABLE `history`
+  ADD CONSTRAINT `history_ibfk_1` FOREIGN KEY (`player_one_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `history_ibfk_2` FOREIGN KEY (`player_two_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `relations`
