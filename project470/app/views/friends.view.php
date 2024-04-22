@@ -99,7 +99,7 @@
                 <td><?php echo $req->email ?></td>
                 <td><?php echo $req->country ?></td>
                 <td><form method="get" action="<?=ROOT?>/friends"><button  name = "accept_req" value = "<?=$req->sender_id?>" class="button-req" style="vertical-align:middle" type="submit"><span>Accept</span></button></form>
-                    <form method="get" action="<?=ROOT?>/friends"><button  name = "reject_req" value = "<?=$req->sender_id?>" class="button-req" style="vertical-align:middle" type="submit"><span>Reject</span></button></form></td>';
+                    <form method="get" action="<?=ROOT?>/friends"><button  name = "reject_req" value = "<?=$req->sender_id?>" class="button-req" style="vertical-align:middle" type="submit"><span>Reject</span></button></form></td>
                 
             <?php endforeach;?>
           <?php endif;?>
