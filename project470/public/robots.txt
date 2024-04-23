@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /ajax/
+
+#tells google controller to not index the admin page
